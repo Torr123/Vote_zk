@@ -1,0 +1,8 @@
+numpy
+configparser
+pycrypto
+sqlitedict
+gmpy
+primefac
+flask
+rsa

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+    <title>Voting form</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+<body>
+<div class="testbox">
+    <form action="/">
+        <div class="banner">
+            <h1>Vote</h1>
+        </div>
+        <div class="item">
+            <label for="name">Name<span class="red">*</span></label>
+            <div class="name-item">
+                <input id="name" type="text" name="name" placeholder="First" required/>
+                <input id="user_tag" type="text" name="name" placeholder="Last" required/>
+            </div>
+        </div>
+        <div class="question">
+            <label>Vote</label>
+            <div class="question-answer">
+                <div>
+                    <input type="radio" value=0 id="radio_1" name="candidate"/>
+                    <label for="radio_1" class="radio"><span>Vladimir</span></label>
+                </div>
+                <div>
+                    <input type="radio" value=1 id="radio_2" name="candidate"/>
+                    <label for="radio_2" class="radio"><span>Vladimirovich</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="btn-block">
+            <button id="btnSubmit" type="button">Send</button>
+        </div>
+    </form>
+</div>
+</body>
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+
+<script>
+    $(document).ready(function () {
+        function button_handler() {
+            const payload = {
+                user: document.getElementById('user_tag').value,
+                vote: $("input[name='candidate']:checked").val(),
+            };
+            $.ajax({
+                type: 'POST',
+                url: 'http://127.0.0.1:5000/voting',
+                data: payload,
+                async: false,
+                content_type: 'application/json;charset=UTF-8',
+                success: function (data, status, xhr) {
+                    location.href = (data.valid) ? 'final' : 'error';
+                },
+                error: function (data, status, error) {
+                    alert('error!');
+                    console.log(status);
+                }
+            });
+
+            return false;
+        }
+
+        $('#btnSubmit').click(function () {
+            button_handler();
+        });
+    });
+</script>
