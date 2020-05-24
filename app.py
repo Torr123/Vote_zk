@@ -29,5 +29,5 @@ def func():
     valid = main(data['user'])
     if valid:
         db[data['vote']] = db.get(data['vote'], 0) + 1
-        print(db[data['vote']])
+        print(data['vote'],":",db[data['vote']])
     return {'valid': valid}, 200

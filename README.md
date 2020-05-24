@@ -2,6 +2,10 @@
 
 ### This is the implementation of electronic voting using zk-SNARK technology.
 
+[![Here you can see how it works](https://github.com/Torr123/Vote_zk/znVotediag.jpg)](https://github.com/Torr123/Vote_zk/)
+
+### Running:
+
 To run the application, you should make several steps
 
 Step 0: You should have Python 3.7+ on your machine. 
