@@ -2,7 +2,7 @@
 
 ### This is the implementation of electronic voting using zk-SNARK technology.
 
-![Here you can see how it works](https://github.com/Torr123/Vote_zk/znVotediag.jpg)
+![Here you can see how it works](https://github.com/Torr123/Vote_zk/blob/master/znVotediag.jpg)
 
 ### Running:
 
