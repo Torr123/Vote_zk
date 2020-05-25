@@ -1,6 +1,5 @@
 import socket
 
-#from zk_snark.proof import verifier, voters_list
 from zk_snark.verify import verifier, voters_list
 from utils import fill_config
 
@@ -9,9 +8,9 @@ def main():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         print('Socket created')
 
-        sock.bind(('localhost', 0))
+        sock.bind(('', 0))
         sock.listen()
-        fill_config(port=sock.getsockname()[1])
+        fill_config(port=sock.getsockname()[1], host='localhost')
 
         while True:
             conn, addr = sock.accept()
