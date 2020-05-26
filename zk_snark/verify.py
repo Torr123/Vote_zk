@@ -5,18 +5,9 @@ from zk_snark.qap import r1cs_to_qap, create_solution_polynomials
 from zk_snark.to_r1cs import code_to_r1cs_with_inputs
 from sqlitedict import SqliteDict
 import zlib, pickle, sqlite3
+from decimal import Decimal
 
-def my_encode(obj):
-	return sqlite3.Binary(zlib.compress(pickle.dumps(obj, pickle.HIGHEST_PROTOCOL)))
-def my_decode(obj):
-	return pickle.loads(zlib.decompress(bytes(obj)))
-
-voters_dict = SqliteDict('./Trusted_users_serv.sqlite', autocommit=True, encode=my_encode, decode=my_decode)
-
-voters_dict['Novikov'] = 2
-voters_dict['Vaganov'] = 3
-voters_dict['Panov'] = 4
-voters_dict['Molotkov'] = 5
+voters_dict = SqliteDict('./Trusted_users_serv.sqlite', autocommit=True)
 
 func = """
 def qeval(x):
@@ -24,8 +15,10 @@ def qeval(x):
     return y + x + 5
 """
 
-voters_list = [voters_dict['Novikov'], voters_dict['Vaganov'], voters_dict['Panov'], voters_dict['Molotkov']]
+voters_list = []
 
+for i in voters_dict.values():
+	voters_list.append(i)
 
 
 def verifier(index):
